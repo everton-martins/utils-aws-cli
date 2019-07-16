@@ -21,6 +21,14 @@
 	aws ec2 describe-instances --instance-ids "i-00ae0b338c2e1eed2" --query 'Reservations[].Instances[].EnaSupport'
 
 
+## Stop Instance
+
+	aws ec2 stop-instances --instance-ids $1
+
+## Detach volume
+
+	aws ec2 detach-volume --volume-id $1 --force
+
 
 ## DYNAMODB
 
