@@ -35,12 +35,12 @@
 
 ### Describe table scaling
 
-	aws --region us-east-1 application-autoscaling describe-scalable-targets --service-namespace dynamodb --resource-id "table/WALLET_TRANSACTION"
+	aws --region us-east-1 application-autoscaling describe-scalable-targets --service-namespace dynamodb --resource-id "table/TABLE_XYZ"
 
 
 ### Describe table scaling policy
 	
-	aws --region us-east-1 application-autoscaling describe-scaling-policies --service-namespace dynamodb --resource-id "table/WALLET_TRANSACTION" --policy-name "AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+	aws --region us-east-1 application-autoscaling describe-scaling-policies --service-namespace dynamodb --resource-id "table/TABLE_XYZ" --policy-name "AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
 
 
 ### Describe table capacity
@@ -101,7 +101,7 @@
   	| grep "|" | cut -d"|" -f2 | cut -c3- \
   	| while read LINE; \
        do echo -ne "aws route53 change-resource-record-sets --hosted-zone-id Z30N255VLTE3FX --change-batch '{ \"Comment\": \"Automation\", \"Changes\": [ { \"Action\": \"UPSERT\", \"ResourceRecordSet\": "; \
-	      CNAME=$(aws route53 list-resource-record-sets --hosted-zone-id Z38ERPC71LLE7 --query "ResourceRecordSets[?ResourceRecords[?Value=='$LINE']]"); echo ${CNAME::-1}" }]}' " | cut -c2- | sed -e 's/agiplan.aws.local/agibank-dev.in/g'; \
+	      CNAME=$(aws route53 list-resource-record-sets --hosted-zone-id Z38ERPC71LLE7 --query "ResourceRecordSets[?ResourceRecords[?Value=='$LINE']]"); echo ${CNAME::-1}" }]}' " | cut -c2- | sed -e 's/company.aws.local/company-dev.in/g'; \
 	   done \
   	| grep -v ":  }]}"
 
@@ -115,7 +115,7 @@ output = json
 region = sa-east-1
 [profile dev]
 region = us-east-1
-role_arn = arn:aws:iam::952599238263:role/db_automation   #Role of another account
+role_arn = arn:aws:iam::9999999999999:role/db_automation   #Role of another account
 credential_source=Ec2InstanceMetadata			  #Role of EC2 Instance
 
 
@@ -134,7 +134,7 @@ Na conta de origem editar a relação de confiança na Role da EC2 acima:
       {  
          "Effect":"Allow",
          "Principal":{  
-            "AWS":"arn:aws:iam::952599238263:role/db_automation"
+            "AWS":"arn:aws:iam::99999999999999:role/db_automation"
          },
          "Action":"sts:AssumeRole"
       }
