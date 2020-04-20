@@ -32,7 +32,16 @@
 
 ## DYNAMODB
 
+### List Tables Size
 
+	aws dynamodb list-tables --output text | cut -f2 | while read LINE; do echo "Table: "$LINE" Size: "$(aws dynamodb describe-table --table-name  $LINE | jq '.Table.TableSizeBytes'); done
+	
+
+### Total size of tables
+
+	aws dynamodb list-tables --output text | cut -f2 | while read LINE; do aws dynamodb describe-table --table-name  $LINE | jq '.Table.TableSizeBytes'; done | awk '{s+=$1} END {print s}'
+	
+	
 ### Describe table scaling
 
 	aws --region us-east-1 application-autoscaling describe-scalable-targets --service-namespace dynamodb --resource-id "table/TABLE_XYZ"
