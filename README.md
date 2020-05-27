@@ -150,7 +150,9 @@ Na conta de origem editar a relação de confiança na Role da EC2 acima:
    ]
 }
 
+## EC2 metadata
 
+  curl -Ss http://169.254.169.254/latest/meta-data/placement/availability-zone
 
 ## INSTALL AWS CLI
 
