@@ -15,6 +15,9 @@
 	done
 
 
+## Describe RDS by Engine
+
+	aws rds describe-db-instances --filters Name=engine,Values=oracle-ee | jq '.DBInstances[].DBInstanceIdentifier'
 
 ## Describe instance EC2
 
